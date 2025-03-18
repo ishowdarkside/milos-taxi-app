@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import { login, signup } from "@/services/auth";
+import { login, signup } from "@/modules/Auth/services";
 import { SignUpType } from "@/types/authTypes";
 import { Session, SignInWithPasswordCredentials, User } from "@supabase/supabase-js";
 import { useMutation } from "@tanstack/react-query";

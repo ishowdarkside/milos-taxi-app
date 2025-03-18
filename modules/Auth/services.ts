@@ -1,5 +1,5 @@
 import { SignUpType } from "@/types/authTypes";
-import { supabase } from "@/services/supabase";
+import { supabase } from "@/lib/supabase";
 import { SignInWithPasswordCredentials } from "@supabase/supabase-js";
 
 export const signup = async (payload: SignUpType) => {
