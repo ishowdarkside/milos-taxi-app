@@ -2,6 +2,7 @@ import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import { useAuth } from "@/hooks/useAuth";
 import { useConfirmSignup } from "@/modules/Auth/hooks/useConfirmSignup";
+import { router } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 
@@ -10,6 +11,7 @@ const ConfirmScreen = () => {
   const { session } = useAuth();
 
   const { verifyIntegrityMutation } = useConfirmSignup();
+  if (!session?.user) return router.replace("/(auth)/sign-up");
 
   return (
     <View className="flex-1 h-full items-center justify-center px-5">
