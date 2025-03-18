@@ -1,11 +1,11 @@
 import { Stack } from "expo-router";
-import { useEffect } from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-import "@/app/globals.css";
+import { useEffect } from "react";
 import ToastManager from "toastify-react-native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+import "@/app/globals.css";
 
 SplashScreen.preventAutoHideAsync();
 
