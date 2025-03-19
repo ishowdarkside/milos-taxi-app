@@ -5,11 +5,25 @@ import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import Oauth from "@/components/Oauth";
+import { useAuthActions } from "@/modules/Auth/hooks/useAuthActions";
+import { useAuth } from "@/hooks/useAuth";
 
 const SignUp = () => {
+  const { registerMutation } = useAuthActions();
+  const { setAuth } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
 
-  const onSignUpPress = async () => {};
+  const onSignUpPress = async () => {
+    const response = await registerMutation({
+      email: form.email,
+      first_name: form.name,
+      password: form.password,
+      last_name: "dummy",
+    });
+
+    setAuth(response);
+    router.replace("/(auth)/confirm");
+  };
   return (
     <ScrollView className="flex-1 bg-white" snapToStart={false}>
       <View className="flex-1 bg-white">

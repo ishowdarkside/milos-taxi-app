@@ -16,7 +16,7 @@ export const useAuthActions = () => {
 
   const { mutateAsync: registerMutation, isPending } = useMutation({
     mutationFn: (payload: SignUpType) => signup(payload),
-    onSuccess: onSuccessfulAuth,
+    onSuccess: ({ user }) => Toast.success(`Confirmation code sent to ${user?.email}`),
     onError: (err) => Toast.error(err.message, "top"),
   });
 
