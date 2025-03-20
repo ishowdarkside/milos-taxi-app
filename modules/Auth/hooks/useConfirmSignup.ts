@@ -20,7 +20,7 @@ export const useConfirmSignup = () => {
       if (error) return Toast.error(error.message);
 
       setAuth({ user: data.user, session: data.session });
-      Toast.success("Signed up successfully!");
+      Toast.success("Uspjesno ste prijavljeni!");
       router.replace("/(root)/(tabs)/home");
     },
   });
