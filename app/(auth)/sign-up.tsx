@@ -22,7 +22,7 @@ const SignUp = () => {
     });
 
     setAuth(response);
-    router.replace("/(auth)/confirm");
+    router.replace("/(root)/(tabs)/home");
   };
   return (
     <ScrollView className="flex-1 bg-white" snapToStart={false}>
@@ -70,8 +70,6 @@ const SignUp = () => {
             <Text className="text-primary-500">Log in</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Verification Modal */}
       </View>
     </ScrollView>
   );
