@@ -5,13 +5,13 @@ import { router } from "expo-router";
 import { Toast } from "toastify-react-native";
 
 export const useConfirmSignup = () => {
-  const { session, setAuth } = useAuth();
+  const { session } = useAuth();
 
   const { mutate: verifyIntegrityMutation, isPending } = useMutation({
     mutationFn: async (token: string) => {
       if (!session?.user) return;
 
-      const { error, data } = await supabase.auth.verifyOtp({
+      const { error } = await supabase.auth.verifyOtp({
         email: session?.user?.email || "",
         token,
         type: "signup",
@@ -19,7 +19,6 @@ export const useConfirmSignup = () => {
 
       if (error) return Toast.error(error.message);
 
-      setAuth({ user: data.user, session: data.session });
       Toast.success("Uspjesno ste prijavljeni!");
       router.replace("/(root)/(tabs)/home");
     },
