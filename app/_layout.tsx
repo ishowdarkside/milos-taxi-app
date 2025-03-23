@@ -30,7 +30,32 @@ export default function RootLayout() {
 
   return (
     <>
-      <ToastManager position="bottom" showProgressBar={false} style={{ width: "100%" }} showCloseIcon={false} />
+      <ToastManager
+        position="bottom"
+        showProgressBar={false}
+        showCloseIcon={true}
+        animationIn="fadeInUp"
+        animationOut="fadeOutDown"
+        duration={4000}
+        style={{
+          width: "90%",
+          backgroundColor: "#222",
+          borderRadius: 10,
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 4,
+          elevation: 5,
+        }}
+        textStyle={{
+          fontSize: 16,
+          color: "#fff",
+          textAlign: "center",
+          fontWeight: "600",
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />

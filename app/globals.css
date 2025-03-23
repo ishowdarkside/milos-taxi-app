@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .header {
+    @apply font-JakartaBold text-3xl;
+  }
+
+  .subheader {
+    @apply text-secondary-400 mt-2;
+  }
+}

@@ -1,46 +1,49 @@
-import { Text, ScrollView, View, Image, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { icons, images } from "@/constants";
+import { router } from "expo-router";
+import React from "react";
+import { Text, View, TouchableOpacity } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { useForm } from "react-hook-form";
+
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
-import { router } from "expo-router";
 import Oauth from "@/components/Oauth";
 import { useAuthActions } from "@/modules/Auth/hooks/useAuthActions";
+import { RegistrationInterface } from "@/modules/Auth/types";
 
 const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegistrationInterface>();
   const { loginMutation } = useAuthActions();
-  const [form, setForm] = useState({ email: "", password: "" });
 
   const onSignInPress = async () => {
     await loginMutation({ email: form.email, password: form.password });
   };
   return (
-    <ScrollView className="flex-1 bg-white" snapToStart={false}>
-      <View className="flex-1 bg-white">
-        <View className="relative w-full h-[250px]">
-          <Image source={images.signUpCar} className="z-0 w-full h-[250px]" />
-          <Text className="text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5">Welcome 👋</Text>
-        </View>
-
+    <View className="bg-primary-500 flex-1 ">
+      <View className="bg-white pt-20 pb-24 rounded-t-[50px] mt-auto w-full">
         <View className="p-5">
+          <Text className="font-JakartaBold text-5xl text-center mb-14">Prijava</Text>
           <InputField
             label="Email"
-            placeholder="Enter your email"
-            icon={icons.email}
-            value={form.email}
-            onChangeText={(value) => setForm((prev) => ({ ...prev, email: value }))}
+            placeholder="Unesite svoju email adresu"
+            icon={<FontAwesomeIcon icon={faEnvelope} color="#C2C2C2" />}
+            {...register("name", { required: true })}
           />
 
           <InputField
-            label="Password"
-            placeholder="Enter your password"
-            icon={icons.lock}
-            value={form.password}
+            label="Lozinka"
+            placeholder="Unesite svoju lozinku"
             secureTextEntry
-            onChangeText={(value) => setForm((prev) => ({ ...prev, password: value }))}
+            icon={<FontAwesomeIcon icon={faLock} color="#C2C2C2" />}
+            {...register("password", { required: true })}
           />
 
-          <CustomButton title="Sign in" onPress={onSignInPress} className="mt-6" />
+          <CustomButton title="Prijavi se" onPress={onSignInPress} className="mt-6" />
 
           <Oauth />
 
@@ -48,14 +51,12 @@ const SignIn = () => {
             onPress={() => router.replace("/(auth)/sign-up")}
             className="text-lg flex flex-row justify-center text-center text-general-200 mt-10"
           >
-            <Text>Don't have an account? </Text>
-            <Text className="text-primary-500">Sign up</Text>
+            <Text>Još uvijek nemaš nalog? </Text>
+            <Text className="text-primary-500">Registruj se</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Verification Modal */}
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

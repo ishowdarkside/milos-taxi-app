@@ -7,7 +7,8 @@ export const useUser = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const received = await supabase.auth.getUser();
-      const profile = await supabase.from("profiles").select().eq("id", received?.data?.user?.id);
+      const userId = received?.data?.user?.id;
+      const profile = await supabase.rpc(" find_user_by_id", { user_id: userId });
       setUser(profile.data?.at(0));
     };
 

@@ -1,6 +1,7 @@
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import CustomButton from "./CustomButton";
-import { icons } from "@/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Oauth = () => {
   const handleGoogleSignIn = async () => {};
@@ -15,7 +16,7 @@ const Oauth = () => {
       <CustomButton
         title="Login With Google"
         className="mt-5 w-full shadow-none"
-        IconLeft={() => <Image source={icons.google} resizeMode="contain" className="w-5 h-5 mx-2" />}
+        IconLeft={() => <FontAwesomeIcon icon={faGoogle} />}
         bgVariant="outline"
         textVariant="primary"
         onPress={handleGoogleSignIn}
