@@ -16,17 +16,15 @@ const RoleScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispatch<SetSt
 
   const chooseRole = (role: "driver" | "client") => {
     setValue("role", role);
-    if (role === "driver") return router.navigate("/(auth)/driver-onboarding");
-
-    // Choosen role is Client
-    setActiveScreen("signup");
+    if (role === "driver") setActiveScreen("driver_details");
+    else setActiveScreen("signup");
   };
 
   return (
     <SafeAreaView className="h-full flex-1  relative bg-white">
       <View className="flex-1 p-5 pt-10">
-        <Text className="font-JakartaBold text-3xl text-center">Odaberi ulogu</Text>
-        <Text className="text-center text-secondary-400 mt-2">Kako bi volio da koristis Milos App</Text>
+        <Text className="header text-center">Odaberi ulogu</Text>
+        <Text className="text-center subheader">Kako bi volio da koristis Milos App</Text>
 
         <View className=" mt-10 gap-5 ">
           <TouchableOpacity

@@ -7,6 +7,7 @@ import RoleScreen from "@/modules/Auth/components/RoleScreen";
 import { RegistrationInterface } from "@/modules/types";
 import { FormProvider, useForm } from "react-hook-form";
 import { registrationSchema } from "@/modules/utils";
+import DriverDetailsScreen from "@/modules/Auth/components/DriverDetailsScreen";
 
 export type activeScreenType = "signup" | "role" | "driver_details";
 
@@ -20,6 +21,7 @@ const SignUp = () => {
       <View className="flex-1 bg-primary-500">
         {activeScreen === "signup" && <SignupScreen />}
         {activeScreen === "role" && <RoleScreen setActiveScreen={setActiveScreen} />}
+        {activeScreen === "driver_details" && <DriverDetailsScreen setActiveScreen={setActiveScreen} />}
       </View>
     </FormProvider>
   );
