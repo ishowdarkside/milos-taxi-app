@@ -8,16 +8,18 @@ import { RegistrationInterface } from "@/modules/types";
 import { FormProvider, useForm } from "react-hook-form";
 import { registrationSchema } from "@/modules/utils";
 
+export type activeScreenType = "signup" | "role" | "driver_details";
+
 const SignUp = () => {
   const form = useForm<RegistrationInterface>({ resolver: yupResolver(registrationSchema) });
-  const [activeScreen, setActiveScreen] = useState<"signup" | "role" | "driver_details">("role");
+  const [activeScreen, setActiveScreen] = useState<activeScreenType>("role");
 
-  const onSignUpPress = async () => setActiveScreen("role");
+  console.log(activeScreen);
   return (
     <FormProvider {...form}>
       <View className="flex-1 bg-primary-500">
-        {activeScreen === "signup" && <SignupScreen onChangeScreen={onSignUpPress} />}
-        {activeScreen === "role" && <RoleScreen navigateBack={() => setActiveScreen("signup")} />}
+        {activeScreen === "signup" && <SignupScreen />}
+        {activeScreen === "role" && <RoleScreen setActiveScreen={setActiveScreen} />}
       </View>
     </FormProvider>
   );

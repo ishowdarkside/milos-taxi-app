@@ -10,11 +10,7 @@ import InputField from "@/components/InputField";
 import Oauth from "@/components/Oauth";
 import { RegistrationInterface } from "@/modules/types";
 
-type SignupScreenProps = {
-  onChangeScreen: () => void;
-};
-
-const SignupScreen = ({ onChangeScreen }: SignupScreenProps) => {
+const SignupScreen = () => {
   const {
     control,
     formState: { errors },
@@ -27,7 +23,6 @@ const SignupScreen = ({ onChangeScreen }: SignupScreenProps) => {
   const handleNextRegisterState = async () => {
     await trigger();
     if (errors.email || errors.name || errors.password) return;
-    onChangeScreen();
   };
   return (
     <View className="bg-white pt-14 pb-24 rounded-t-[50px] mt-auto w-full ">
