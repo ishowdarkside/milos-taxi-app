@@ -1,10 +1,10 @@
 import { useAuth } from "@/hooks/useAuth";
 import { login, signup } from "@/modules/Auth/services";
-import { SignUpType } from "@/types/authTypes";
 import { Session, SignInWithPasswordCredentials, User } from "@supabase/supabase-js";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Toast } from "toastify-react-native";
+import { RegistrationInterface } from "../types";
 
 export const useAuthActions = () => {
   const { setAuth } = useAuth();
@@ -15,7 +15,7 @@ export const useAuthActions = () => {
   };
 
   const { mutateAsync: registerMutation, isPending } = useMutation({
-    mutationFn: (payload: SignUpType) => signup(payload),
+    mutationFn: (payload: RegistrationInterface) => signup(payload),
     onSuccess: onSuccessfulAuth,
     onError: (err) => Toast.error(err.message, "top"),
   });

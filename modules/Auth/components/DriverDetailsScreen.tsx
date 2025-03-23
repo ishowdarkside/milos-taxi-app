@@ -3,13 +3,11 @@ import React, { SetStateAction } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { router } from "expo-router";
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import { activeScreenType } from "@/app/(auth)/sign-up";
-import { RegistrationInterface } from "@/modules/types";
+import { RegistrationInterface } from "@/modules/Auth/types";
 import { Controller, useFormContext } from "react-hook-form";
-import { KeyboardAvoidingView } from "react-native";
 
 const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispatch<SetStateAction<activeScreenType>> }) => {
   const {
@@ -20,7 +18,7 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
     clearErrors,
   } = useFormContext<RegistrationInterface>();
 
-  const [carMake, carModel, carPlate] = watch(["car_make", "car_model", "car_plate"]);
+  const [carMake, carModel, carPlate, carSeats] = watch(["car_make", "car_model", "car_plate", "car_seats"]);
 
   const handleNextStep = async () => {
     await trigger();
@@ -30,9 +28,14 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
     setActiveScreen("signup");
   };
 
+  const handleBack = () => {
+    setActiveScreen("role");
+    clearErrors(["car_make", "car_plate", "car_model", "car_seats"]);
+  };
+
   return (
     <SafeAreaView className="p-5 bg-white flex-1">
-      <TouchableOpacity onPress={() => setActiveScreen("role")} className="bg-primary-500 self-start p-5 rounded-full">
+      <TouchableOpacity onPress={handleBack} className="bg-primary-500 self-start p-5 rounded-full">
         <FontAwesomeIcon icon={faArrowLeft} color="#ffff" />
       </TouchableOpacity>
 
@@ -43,7 +46,7 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
           odaberu/pronađu.
         </Text>
 
-        <KeyboardAvoidingView className="mt-14 gap-4">
+        <View className="mt-14 gap-4">
           <View>
             <Controller
               control={control}
@@ -55,10 +58,10 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
                   onBlur={onBlur}
                   value={value}
                   placeholder="Wolkswagen"
+                  error={errors.car_make && !carMake}
                 />
               )}
             />
-            {errors.car_make && !carMake && <Text className="text-red-500">Ovo polje je obavezno!</Text>}
           </View>
 
           <View>
@@ -66,10 +69,16 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
               control={control}
               name="car_model"
               render={({ field: { onBlur, onChange, value } }) => (
-                <InputField label="Model vozila" onChangeText={onChange} onBlur={onBlur} value={value} placeholder="Passat 6" />
+                <InputField
+                  label="Model vozila"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  placeholder="Passat 6"
+                  error={errors.car_model && !carModel}
+                />
               )}
             />
-            {errors.car_model && !carModel && <Text className="text-red-500">Ovo polje je obavezno!</Text>}
           </View>
 
           <View>
@@ -83,16 +92,33 @@ const DriverDetailsScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispa
                   onBlur={onBlur}
                   value={value}
                   placeholder="XXX-XXX-XXX"
+                  error={errors.car_plate && !carPlate}
                 />
               )}
             />
-
-            {errors.car_plate && !carPlate && <Text className="text-red-500">Ovo polje je obavezno!</Text>}
           </View>
-          <View className="mt-14 gap-4">
+
+          <View>
+            <Controller
+              control={control}
+              name="car_seats"
+              render={({ field: { onBlur, onChange, value } }) => (
+                <InputField
+                  label="Broj sjedišta"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value as any}
+                  placeholder="4"
+                  error={errors.car_seats && !carSeats}
+                  keyboardType="number-pad"
+                />
+              )}
+            />
+          </View>
+          <View className="mt-2  gap-4">
             <CustomButton title="Dalje" className="mt-4" onPress={handleNextStep} />
           </View>
-        </KeyboardAvoidingView>
+        </View>
       </View>
     </SafeAreaView>
   );

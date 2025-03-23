@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCarSide, faUser, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { TouchableOpacity } from "react-native";
 import { useFormContext } from "react-hook-form";
-import { RegistrationInterface } from "@/modules/types";
+import { RegistrationInterface } from "@/modules/Auth/types";
 import { router } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import React, { SetStateAction } from "react";
@@ -14,9 +14,9 @@ import { activeScreenType } from "@/app/(auth)/sign-up";
 const RoleScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispatch<SetStateAction<activeScreenType>> }) => {
   const { setValue } = useFormContext<RegistrationInterface>();
 
-  const chooseRole = (role: "driver" | "client") => {
+  const chooseRole = (role: "drivers" | "clients") => {
     setValue("role", role);
-    if (role === "driver") setActiveScreen("driver_details");
+    if (role === "drivers") setActiveScreen("driver_details");
     else setActiveScreen("signup");
   };
 
@@ -28,7 +28,7 @@ const RoleScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispatch<SetSt
 
         <View className=" mt-10 gap-5 ">
           <TouchableOpacity
-            onPress={() => chooseRole("client")}
+            onPress={() => chooseRole("clients")}
             className=" relative  flex-row gap-4 p-5 items-start bg-secondary-100 border border-secondary-200 rounded-md"
           >
             <View className="absolute top-5 right-5  ">
@@ -47,7 +47,7 @@ const RoleScreen = ({ setActiveScreen }: { setActiveScreen: React.Dispatch<SetSt
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => chooseRole("driver")}
+            onPress={() => chooseRole("drivers")}
             className=" relative flex-row gap-4 p-5 items-start bg-secondary-100 border border-secondary-200 rounded-md"
           >
             <View className="absolute top-5 right-5  ">

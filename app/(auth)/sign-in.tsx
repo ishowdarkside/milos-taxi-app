@@ -10,7 +10,7 @@ import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import Oauth from "@/components/Oauth";
 import { useAuthActions } from "@/modules/Auth/hooks/useAuthActions";
-import { RegistrationInterface } from "@/modules/types";
+import { RegistrationInterface } from "@/modules/Auth/types";
 
 const SignIn = () => {
   const {
