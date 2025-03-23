@@ -1,16 +1,12 @@
-import { useAuth } from "@/hooks/useAuth";
 import { login, signup } from "@/modules/Auth/services";
-import { Session, SignInWithPasswordCredentials, User } from "@supabase/supabase-js";
+import { SignInWithPasswordCredentials } from "@supabase/supabase-js";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Toast } from "toastify-react-native";
 import { RegistrationInterface } from "../types";
 
 export const useAuthActions = () => {
-  const { setAuth } = useAuth();
-
-  const onSuccessfulAuth = (response: { user: User | null; session: Session | null }) => {
-    setAuth(response);
+  const onSuccessfulAuth = () => {
     router.replace("/(root)/(tabs)/home");
   };
 
