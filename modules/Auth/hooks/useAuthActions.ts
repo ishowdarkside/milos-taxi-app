@@ -16,6 +16,7 @@ export const useAuthActions = () => {
 
   const { mutateAsync: registerMutation, isPending } = useMutation({
     mutationFn: (payload: SignUpType) => signup(payload),
+    onSuccess: onSuccessfulAuth,
     onError: (err) => Toast.error(err.message, "top"),
   });
 
