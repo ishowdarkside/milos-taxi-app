@@ -8,3 +8,8 @@ export type RegistrationInterface = {
   car_plate: string;
   car_seats: number;
 };
+
+export type LoginInterface = {
+  email: string;
+  password: string;
+};
